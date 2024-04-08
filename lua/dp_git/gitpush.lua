@@ -396,4 +396,6 @@ function M.clone()
   end)
 end
 
+function M.lazygit() B.system_run('start', 'lazygit') end
+
 return M

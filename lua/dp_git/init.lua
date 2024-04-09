@@ -10,6 +10,7 @@ if not sta then return print('Dp_base is required!', debug.getinfo(1)['source'])
 if B.check_plugins {
       'folke/which-key.nvim',
       'dp_telescope',
+      'dp_imaps',
     } then
   return
 end

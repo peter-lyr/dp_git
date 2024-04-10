@@ -11,6 +11,9 @@ if B.check_plugins {
       'folke/which-key.nvim',
       'dp_telescope',
       'dp_imaps',
+      -- 'lewis6991/gitsigns.nvim',
+      'peter-lyr/gitsigns.nvim',
+      'tpope/vim-fugitive',
     } then
   return
 end

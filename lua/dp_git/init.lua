@@ -10,6 +10,9 @@ if not sta then return print('Dp_base is required!', debug.getinfo(1)['source'])
 if B.check_plugins {
       'folke/which-key.nvim',
       'dp_telescope',
+      -- 'lewis6991/gitsigns.nvim',
+      'peter-lyr/gitsigns.nvim',
+      'tpope/vim-fugitive',
     } then
   return
 end

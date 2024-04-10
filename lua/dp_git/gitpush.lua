@@ -94,52 +94,52 @@ function M.addcommitpush(info, commit_history_en)
 end
 
 function M.addcommitpush_curline()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.curline)
 end
 
 function M.addcommitpush_single_quote()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.single_quote)
 end
 
 function M.addcommitpush_double_quote()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.double_quote)
 end
 
 function M.addcommitpush_parentheses()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.parentheses)
 end
 
 function M.addcommitpush_bracket()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.bracket)
 end
 
 function M.addcommitpush_brace()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.brace)
 end
 
 function M.addcommitpush_back_quote()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.back_quote)
 end
 
 function M.addcommitpush_angle_bracket()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.g.angle_bracket)
 end
 
 function M.addcommitpush_cword()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.fn.expand '<cword>')
 end
 
 function M.addcommitpush_cWORD()
-  require 'dp_imaps'.setreg()
+  B.setreg()
   M.addcommitpush(vim.fn.expand '<cWORD>')
 end
 

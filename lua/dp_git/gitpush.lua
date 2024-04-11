@@ -202,7 +202,7 @@ function M.graph_start()
 end
 
 function M.git_browser()
-  local _, url = B.get_git_remote_url()
+  local _, url = M.get_git_remote_url()
   if B.is(url) then
     B.system_run('start silent', 'start https://%s', url)
   end
@@ -293,13 +293,47 @@ function M.pull_all_prepare()
   end
 end
 
+function M.get_git_remote_url(proj)
+  local remote = ''
+  if proj then
+    remote = vim.fn.system(string.format('cd %s && git remote -v', proj))
+  else
+    remote = vim.fn.system 'git remote -v'
+  end
+  local res = B.findall('.*git@([^:]+):([^/]+)/([^ ]+).*', remote)
+  local urls = {}
+  local type = nil
+  if #res == 0 then
+    res = B.findall('https://([^ ]+)', remote)
+    for _, r in ipairs(res) do
+      local url = r
+      if not B.is_in_tbl(url, urls) then
+        urls[#urls + 1] = url
+        type = 'https'
+      end
+    end
+  else
+    for _, r in ipairs(res) do
+      local url = string.format('%s/%s/%s', unpack(r))
+      if not B.is_in_tbl(url, urls) then
+        urls[#urls + 1] = url
+        type = 'ssh'
+      end
+    end
+  end
+  if #urls > 0 then
+    return type, string.format('%s', urls[1])
+  end
+  return type, ''
+end
+
 function M.pull_all()
   if not M.pull_all_prepared then
     M.pull_all_prepare()
   end
   local info = ''
   for _, dir in ipairs(M.repos_dir) do
-    local type, url = B.get_git_remote_url(dir)
+    local type, url = M.get_git_remote_url(dir)
     if type == 'https' then
       B.system_run('start', '%s && git remote remove origin && git remote add origin git@%s:%s && git pull', B.system_cd(dir), url, string.match(url, '[^/]+/(.+)'))
     else

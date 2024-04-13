@@ -564,6 +564,17 @@ end
 
 function M.lazygit() B.system_run('start', 'lazygit') end
 
+function M.get_all_git_repos(force)
+  local all_git_repos_txt = DataSub .. 'all_git_repos.txt'
+  local repos = vim.fn.readfile(all_git_repos_txt)
+  if #repos == 0 or force then
+    B.system_run('start', 'chcp 65001 && python "%s" "%s"', B.scan_git_repos_py, all_git_repos_txt)
+    B.notify_info 'scan_git_repos, try again later.'
+    return nil
+  end
+  return repos
+end
+
 require 'which-key'.register {
   ['<leader>'] = {
     k = { function() return M.leader_k() end, 'git.signs: prev_hunk', expr = true, mode = { 'n', 'v', }, },

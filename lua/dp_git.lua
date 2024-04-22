@@ -24,6 +24,8 @@ M.moving = nil
 M.commit_history_en = nil
 M.pull_all_prepared = nil
 
+M.timeout = 60 * 60 * 24
+
 require 'gitsigns'.setup {
   signs                        = {
     add = { text = '+', },
@@ -216,7 +218,7 @@ function M.addcommitpush(info, commit_history_en)
   pcall(vim.call, 'ProjectRootCD')
   local result = vim.fn.systemlist { 'git', 'status', '-s', }
   if #result > 0 then
-    B.notify_info { 'git status -s', vim.loop.cwd(), table.concat(result, '\n'), }
+    B.notify_info({ 'git status -s', vim.loop.cwd(), table.concat(result, '\n'), }, M.timeout)
     if not info then
       M.commit_history_en = commit_history_en
       M.get_commit_and_do('commit info (Add all and push): ', M.addcommitpush_do)
@@ -291,7 +293,7 @@ function M.commit_push(info, commit_history_en)
   pcall(vim.call, 'ProjectRootCD')
   local result = vim.fn.systemlist { 'git', 'diff', '--staged', '--stat', }
   if #result > 0 then
-    B.notify_info { 'git diff --staged --stat', vim.loop.cwd(), table.concat(result, '\n'), }
+    B.notify_info({ 'git diff --staged --stat', vim.loop.cwd(), table.concat(result, '\n'), }, M.timeout)
     if not info then
       M.commit_history_en = commit_history_en
       M.get_commit_and_do('commit info (commit and push): ', M.commit_push_do)
@@ -316,7 +318,7 @@ function M.commit(info, commit_history_en)
   pcall(vim.call, 'ProjectRootCD')
   local result = vim.fn.systemlist { 'git', 'diff', '--staged', '--stat', }
   if #result > 0 then
-    B.notify_info { 'git diff --staged --stat', vim.loop.cwd(), table.concat(result, '\n'), }
+    B.notify_info({ 'git diff --staged --stat', vim.loop.cwd(), table.concat(result, '\n'), }, M.timeout)
     if not info then
       M.commit_history_en = commit_history_en
       M.get_commit_and_do('commit info (just commit): ', M.commit_do)

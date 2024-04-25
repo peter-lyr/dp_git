@@ -524,6 +524,7 @@ cwd = vim.eval('g:cwd')
 rm_exclude = [
   '.git-.*',
   '.svn'
+  'output'
 ]
 out = subprocess.Popen(['git', 'clean', '-xdn'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=cwd)
 stdout, stderr = out.communicate()

@@ -506,7 +506,7 @@ function M.clean_ignored_files_and_folders()
   local result = vim.fn.systemlist { 'git', 'clean', '-xdn', }
   if #result > 0 then
     B.notify_info { 'git clean -xdn', vim.loop.cwd(), table.concat(result, '\n'), }
-    if B.is_sure 'Sure to del all of them' then
+    if not B.is_sure 'Sure to del all of them' then
       return
     end
   else
@@ -545,7 +545,8 @@ if not stderr:
           shutil.rmtree(file)
         else:
           os.remove(file)
-  vim.command(f"""lua require'base'.notify_info('del {c} Done!')""")
+  vim.command(f"""lua require'dp_base'.notify_info('del {c} Done!')""")
+  vim.command(f"""lua require'nvim-tree.api'.tree.reload()""")
 EOF
 ]]
 end

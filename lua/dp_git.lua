@@ -382,7 +382,7 @@ function M.init_do(git_root_dir)
     file_path:write('\r\n.clang-format', 'a')
     file_path:write('\r\n.clangd', 'a')
   end
-  B.asyncrun_prepare_add(function()
+  B.done_append_default(function()
     M.addcommitpush 's1'
   end)
   B.system_run('asyncrun', {
@@ -482,7 +482,7 @@ end
 
 function M.reset_hard()
   if B.is_sure 'git reset --hard' then
-    B.asyncrun_prepare_add(function()
+    B.done_append_default(function()
       B.set_timeout(100, function()
         vim.cmd 'e!'
       end)
@@ -493,7 +493,7 @@ end
 
 function M.reset_hard_clean()
   if B.is_sure 'git reset --hard && git clean -fd' then
-    B.asyncrun_prepare_add(function()
+    B.done_append_default(function()
       B.set_timeout(100, function()
         vim.cmd 'e!'
       end)

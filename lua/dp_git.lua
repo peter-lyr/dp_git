@@ -9,11 +9,12 @@ if not sta then return print('Dp_base is required!', debug.getinfo(1)['source'])
 
 if B.check_plugins {
       'git@github.com:peter-lyr/dp_init',
-      'folke/which-key.nvim',
-      'dp_telescope',
+      'git@github.com:peter-lyr/dp_telescope',
       -- 'lewis6991/gitsigns.nvim',
-      'peter-lyr/gitsigns.nvim',
+      'git@github.com:peter-lyr/gitsigns.nvim',
+      'folke/which-key.nvim',
       'tpope/vim-fugitive',
+      'paopaol/telescope-git-diffs.nvim',
     } then
   return
 end
@@ -27,5 +28,6 @@ require 'dp_git_push'
 require 'dp_git_show'
 require 'dp_git_reset'
 require 'dp_git_stash'
+require 'dp_git_diffview'
 
 return M

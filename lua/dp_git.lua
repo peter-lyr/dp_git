@@ -106,37 +106,69 @@ function M.leader_j()
   return '<Ignore>'
 end
 
-function M.stage_hunk() require 'gitsigns'.stage_hunk() end
+function M.stage_hunk()
+  require 'gitsigns'.stage_hunk()
+end
 
-function M.stage_hunk_v() require 'gitsigns'.stage_hunk { vim.fn.line '.', vim.fn.line 'v', } end
+function M.stage_hunk_v()
+  require 'gitsigns'.stage_hunk { vim.fn.line '.', vim.fn.line 'v', }
+end
 
-function M.stage_buffer() require 'gitsigns'.stage_buffer() end
+function M.stage_buffer()
+  require 'gitsigns'.stage_buffer()
+end
 
-function M.undo_stage_hunk() require 'gitsigns'.undo_stage_hunk() end
+function M.undo_stage_hunk()
+  require 'gitsigns'.undo_stage_hunk()
+end
 
-function M.reset_hunk() require 'gitsigns'.reset_hunk() end
+function M.reset_hunk()
+  require 'gitsigns'.reset_hunk()
+end
 
-function M.reset_hunk_v() require 'gitsigns'.reset_hunk { vim.fn.line '.', vim.fn.line 'v', } end
+function M.reset_hunk_v()
+  require 'gitsigns'.reset_hunk { vim.fn.line '.', vim.fn.line 'v', }
+end
 
-function M.reset_buffer() require 'gitsigns'.reset_buffer() end
+function M.reset_buffer()
+  require 'gitsigns'.reset_buffer()
+end
 
-function M.preview_hunk() require 'gitsigns'.preview_hunk() end
+function M.preview_hunk()
+  require 'gitsigns'.preview_hunk()
+end
 
-function M.blame_line() require 'gitsigns'.blame_line { full = true, } end
+function M.blame_line()
+  require 'gitsigns'.blame_line { full = true, }
+end
 
-function M.diffthis() require 'gitsigns'.diffthis() end
+function M.diffthis()
+  require 'gitsigns'.diffthis()
+end
 
-function M.diffthis_l() require 'gitsigns'.diffthis '~' end
+function M.diffthis_l()
+  require 'gitsigns'.diffthis '~'
+end
 
-function M.toggle_current_line_blame() require 'gitsigns'.toggle_current_line_blame() end
+function M.toggle_current_line_blame()
+  require 'gitsigns'.toggle_current_line_blame()
+end
 
-function M.toggle_deleted() require 'gitsigns'.toggle_deleted() end
+function M.toggle_deleted()
+  require 'gitsigns'.toggle_deleted()
+end
 
-function M.toggle_numhl() require 'gitsigns'.toggle_numhl() end
+function M.toggle_numhl()
+  require 'gitsigns'.toggle_numhl()
+end
 
-function M.toggle_linehl() require 'gitsigns'.toggle_linehl() end
+function M.toggle_linehl()
+  require 'gitsigns'.toggle_linehl()
+end
 
-function M.toggle_signs() require 'gitsigns'.toggle_signs() end
+function M.toggle_signs()
+  require 'gitsigns'.toggle_signs()
+end
 
 function M.toggle_word_diff()
   local temp = require 'gitsigns'.toggle_word_diff()
@@ -173,7 +205,9 @@ function M.get_commit_history()
   return {}
 end
 
-function M.show_commit_history() B.ui_sel(M.get_commit_history(), 'Show Commit History', function() end) end
+function M.show_commit_history()
+  B.ui_sel(M.get_commit_history(), 'Show Commit History', function() end)
+end
 
 function GitCompletion()
   return B.get_git_modified_files()
@@ -567,7 +601,9 @@ function M.clone()
   end)
 end
 
-function M.lazygit() B.system_run('start', 'lazygit') end
+function M.lazygit()
+  B.system_run('start', 'lazygit')
+end
 
 function M.get_all_git_repos(force)
   local all_git_repos_txt = B.getcreate_file(DataSub, 'all_git_repos.txt')

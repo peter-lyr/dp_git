@@ -338,9 +338,7 @@ function M.clone()
 end
 
 require 'which-key'.register {
-  ['<leader>g'] = { name = 'git', },
   ['<leader>gg'] = { name = 'git.push', },
-  ['<leader>ggv'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {
@@ -348,6 +346,7 @@ require 'which-key'.register {
   ['<leader>gc'] = { function() M.commit_push() end, 'git.push: commit_push', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gp'] = { function() M.pull() end, 'git.push: pull', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gga'] = { function() M.addcommitpush(nil, 1) end, 'git.push: addcommitpush commit_history_en', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggi'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggc'] = { name = 'git.push.clone/commit', },
   ['<leader>ggcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },

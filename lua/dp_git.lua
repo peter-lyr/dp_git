@@ -581,14 +581,40 @@ function M.get_all_git_repos(force)
 end
 
 require 'which-key'.register {
-  ['<leader>k'] = { function() return M.leader_k() end, 'git.signs: prev_hunk', expr = true, mode = { 'n', 'v', }, },
-  ['<leader>j'] = { function() return M.leader_j() end, 'git.signs: next_hunk', expr = true, mode = { 'n', 'v', }, },
   ['<leader>g'] = { name = 'git', },
-  ['<leader>ga'] = { function() M.addcommitpush() end, 'git.push: addcommitpush', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gg'] = { name = 'git.push', },
+  ['<leader>ggv'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
   ['<leader>gb'] = { function() M.git_browser() end, 'git.push: browser', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>ga'] = { function() M.addcommitpush() end, 'git.push: addcommitpush', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gc'] = { function() M.commit_push() end, 'git.push: commit_push', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gl'] = { function() M.lazygit() end, 'git.lazy: lazygit', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gp'] = { function() M.pull() end, 'git.push: pull', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gga'] = { function() M.addcommitpush(nil, 1) end, 'git.push: addcommitpush commit_history_en', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggc'] = { name = 'git.push.clone/commit', },
+  ['<leader>ggcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggcp'] = { function() M.commit_push(nil, 1) end, 'git.push: commit_push commit_history_en', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>gl'] = { function() M.lazygit() end, 'git.lazy: lazygit', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gg<c-g>'] = { function() M.graph_start() end, 'git.push: graph_start', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggg'] = { function() M.graph_asyncrun() end, 'git.push: graph_asyncrun', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggh'] = { function() M.show_commit_history() end, 'git.push: show_commit_history', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>ggr'] = { function() M.reset_hard() end, 'git.push: reset_hard', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggD'] = { function() M.clean_ignored_files_and_folders() end, 'git.push: clean_ignored_files_and_folders', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggd'] = { function() M.reset_hard_clean() end, 'git.push: reset_hard_clean', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
   ['<leader>g<c-0>'] = { function() M.addcommitpush_parentheses() end, 'git.push: addcommitpush parentheses', mode = { 'n', 'v', }, silent = true, },
   ['<leader>g<c-4>'] = { function() M.addcommitpush_cWORD() end, 'git.push: addcommitpush cWORD', mode = { 'n', 'v', }, silent = true, },
   ['<leader>g<c-\'>'] = { function() M.addcommitpush_single_quote() end, 'git.push: addcommitpush single_quote', mode = { 'n', 'v', }, silent = true, },
@@ -601,34 +627,6 @@ require 'which-key'.register {
   ['<leader>g<c-s-.>'] = { function() M.addcommitpush_angle_bracket() end, 'git.push: addcommitpush angle_bracket', mode = { 'n', 'v', }, silent = true, },
   ['<leader>g<c-s-\'>'] = { function() M.addcommitpush_double_quote() end, 'git.push: addcommitpush double_quote', mode = { 'n', 'v', }, silent = true, },
   ['<leader>g<c-s-]>'] = { function() M.addcommitpush_brace() end, 'git.push: addcommitpush brace', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gd'] = { function() M.diffthis() end, 'git.signs: diffthis', mode = { 'n', }, silent = true, },
-  ['<leader>ge'] = { function() M.toggle_deleted() end, 'git.signs: toggle_deleted', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gu'] = { function() M.undo_stage_hunk() end, 'git.signs: undo_stage_hunk', mode = { 'n', }, silent = true, },
-  ['<leader>gg'] = { name = 'git.push', },
-  ['<leader>gg<c-g>'] = { function() M.graph_start() end, 'git.push: graph_start', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggC'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggD'] = { function() M.clean_ignored_files_and_folders() end, 'git.push: clean_ignored_files_and_folders', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gga'] = { function() M.addcommitpush(nil, 1) end, 'git.push: addcommitpush commit_history_en', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggc'] = { function() M.commit_push(nil, 1) end, 'git.push: commit_push commit_history_en', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggd'] = { function() M.reset_hard_clean() end, 'git.push: reset_hard_clean', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggg'] = { function() M.graph_asyncrun() end, 'git.push: graph_asyncrun', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggh'] = { function() M.show_commit_history() end, 'git.push: show_commit_history', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggr'] = { function() M.reset_hard() end, 'git.push: reset_hard', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggv'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gm'] = { name = 'git.signs', },
-  ['<leader>gmb'] = { function() M.blame_line() end, 'git.signs: blame_line', mode = { 'n', 'v', }, },
-  ['<leader>gmd'] = { function() M.diffthis_l() end, 'git.signs: diffthis_l', mode = { 'n', 'v', }, },
-  ['<leader>gmp'] = { function() M.preview_hunk() end, 'git.signs: preview_hunk', mode = { 'n', 'v', }, },
-  ['<leader>gmr'] = { function() M.reset_buffer() end, 'git.signs: reset_buffer', mode = { 'n', 'v', }, },
-  ['<leader>gms'] = { function() M.stage_buffer() end, 'git.signs: stage_buffer', mode = { 'n', 'v', }, },
-  ['<leader>gmt'] = { name = 'git.signs.more', },
-  ['<leader>gmtb'] = { function() M.toggle_current_line_blame() end, 'git.signs: toggle_current_line_blame', mode = { 'n', 'v', }, },
-  ['<leader>gmtd'] = { function() M.toggle_deleted() end, 'git.signs: toggle_deleted', mode = { 'n', 'v', }, },
-  ['<leader>gmtl'] = { function() M.toggle_linehl() end, 'git.signs: toggle_linehl', mode = { 'n', 'v', }, },
-  ['<leader>gmtn'] = { function() M.toggle_numhl() end, 'git.signs: toggle_numhl', mode = { 'n', 'v', }, },
-  ['<leader>gmts'] = { function() M.toggle_signs() end, 'git.signs: toggle_signs', mode = { 'n', 'v', }, },
-  ['<leader>gmtw'] = { function() M.toggle_word_diff() end, 'git.signs: toggle_word_diff', mode = { 'n', 'v', }, },
   ['g<c-0>'] = { function() M.addcommitpush_parentheses() end, 'git.push: addcommitpush parentheses', mode = { 'n', 'v', }, silent = true, },
   ['g<c-4>'] = { function() M.addcommitpush_cWORD() end, 'git.push: addcommitpush cWORD', mode = { 'n', 'v', }, silent = true, },
   ['g<c-\'>'] = { function() M.addcommitpush_single_quote() end, 'git.push: addcommitpush single_quote', mode = { 'n', 'v', }, silent = true, },
@@ -639,8 +637,29 @@ require 'which-key'.register {
   ['g<c-s-.>'] = { function() M.addcommitpush_angle_bracket() end, 'git.push: addcommitpush angle_bracket', mode = { 'n', 'v', }, silent = true, },
   ['g<c-s-\'>'] = { function() M.addcommitpush_double_quote() end, 'git.push: addcommitpush double_quote', mode = { 'n', 'v', }, silent = true, },
   ['g<c-s-]>'] = { function() M.addcommitpush_brace() end, 'git.push: addcommitpush brace', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>k'] = { function() return M.leader_k() end, 'git.signs: prev_hunk', expr = true, mode = { 'n', 'v', }, },
+  ['<leader>j'] = { function() return M.leader_j() end, 'git.signs: next_hunk', expr = true, mode = { 'n', 'v', }, },
+  ['<leader>gd'] = { function() M.diffthis() end, 'git.signs: diffthis', mode = { 'n', }, silent = true, },
+  ['<leader>ge'] = { function() M.toggle_deleted() end, 'git.signs: toggle_deleted', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gu'] = { function() M.undo_stage_hunk() end, 'git.signs: undo_stage_hunk', mode = { 'n', }, silent = true, },
   ['<leader>gr'] = { function() M.reset_hunk() end, 'git.signs: reset_hunk', mode = { 'n', }, silent = true, },
   ['<leader>gs'] = { function() M.stage_hunk() end, 'git.signs: stage_hunk', mode = { 'n', }, silent = true, },
+  ['<leader>gm'] = { name = 'git.signs', },
+  ['<leader>gmb'] = { function() M.blame_line() end, 'git.signs: blame_line', mode = { 'n', 'v', }, },
+  ['<leader>gmd'] = { function() M.diffthis_l() end, 'git.signs: diffthis_l', mode = { 'n', 'v', }, },
+  ['<leader>gmp'] = { function() M.preview_hunk() end, 'git.signs: preview_hunk', mode = { 'n', 'v', }, },
+  ['<leader>gmr'] = { function() M.reset_buffer() end, 'git.signs: reset_buffer', mode = { 'n', 'v', }, },
+  ['<leader>gms'] = { function() M.stage_buffer() end, 'git.signs: stage_buffer', mode = { 'n', 'v', }, },
+  ['<leader>gmt'] = { name = 'git.signs.toggle', },
+  ['<leader>gmtb'] = { function() M.toggle_current_line_blame() end, 'git.signs.toggle: toggle_current_line_blame', mode = { 'n', 'v', }, },
+  ['<leader>gmtd'] = { function() M.toggle_deleted() end, 'git.signs.toggle: toggle_deleted', mode = { 'n', 'v', }, },
+  ['<leader>gmtl'] = { function() M.toggle_linehl() end, 'git.signs.toggle: toggle_linehl', mode = { 'n', 'v', }, },
+  ['<leader>gmtn'] = { function() M.toggle_numhl() end, 'git.signs.toggle: toggle_numhl', mode = { 'n', 'v', }, },
+  ['<leader>gmts'] = { function() M.toggle_signs() end, 'git.signs.toggle: toggle_signs', mode = { 'n', 'v', }, },
+  ['<leader>gmtw'] = { function() M.toggle_word_diff() end, 'git.signs.toggle: toggle_word_diff', mode = { 'n', 'v', }, },
   ag = { ':<C-U>Gitsigns select_hunk<CR>', 'git.signs: select_hunk', mode = { 'o', 'x', }, silent = true, },
   ig = { ':<C-U>Gitsigns select_hunk<CR>', 'git.signs: select_hunk', mode = { 'o', 'x', }, silent = true, },
 }

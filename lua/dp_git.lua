@@ -26,5 +26,6 @@ require 'dp_git_signs'
 require 'dp_git_push'
 require 'dp_git_show'
 require 'dp_git_reset'
+require 'dp_git_stash'
 
 return M

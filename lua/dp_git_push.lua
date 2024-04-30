@@ -323,9 +323,13 @@ function M.pull_all()
 end
 
 function M.clone()
-  local dirs = B.merge_tables(
-    B.get_file_dirs(B.rep(B.buf_get_name()))
-  )
+  local dirs = B.uniq_sort(B.merge_tables(
+    B.get_file_dirs(B.rep(B.buf_get_name())),
+    B.get_path_dir(),
+    B.get_my_dirs(),
+    B.get_SHGetFolderPath 'desktop',
+    B.get_drivers()
+  ))
   B.ui_sel(dirs, 'git clone sel a dir', function(proj)
     if not proj then
       return

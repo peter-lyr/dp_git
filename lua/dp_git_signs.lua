@@ -83,16 +83,18 @@ function M.toggle_word_diff()
   end
 end
 
-function M.leader_k()
-  if vim.wo.diff then return '[c' end
-  vim.schedule(function() require 'gitsigns'.prev_hunk() end)
-  return '<Ignore>'
+function M.prev_hunk()
+  if vim.wo.diff then
+    vim.cmd [[call feedkeys("[c")]]
+  end
+  require 'gitsigns'.prev_hunk()
 end
 
-function M.leader_j()
-  if vim.wo.diff then return ']c' end
-  vim.schedule(function() require 'gitsigns'.next_hunk() end)
-  return '<Ignore>'
+function M.next_hunk()
+  if vim.wo.diff then
+    vim.cmd [[call feedkeys("]c")]]
+  end
+  require 'gitsigns'.next_hunk()
 end
 
 function M.stage_hunk()
@@ -160,8 +162,8 @@ function M.toggle_signs()
 end
 
 require 'which-key'.register {
-  ['<leader>k'] = { function() return M.leader_k() end, 'git.signs: prev_hunk', expr = true, mode = { 'n', 'v', }, },
-  ['<leader>j'] = { function() return M.leader_j() end, 'git.signs: next_hunk', expr = true, mode = { 'n', 'v', }, },
+  ['<leader>k'] = { function() M.prev_hunk() end, 'git.signs: prev_hunk', mode = { 'n', 'v', }, },
+  ['<leader>j'] = { function() M.next_hunk() end, 'git.signs: next_hunk', mode = { 'n', 'v', }, },
   ['<leader>gd'] = { function() M.diffthis() end, 'git.signs: diffthis', mode = { 'n', }, silent = true, },
   ['<leader>ge'] = { function() M.toggle_deleted() end, 'git.signs: toggle_deleted', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gu'] = { function() M.undo_stage_hunk() end, 'git.signs: undo_stage_hunk', mode = { 'n', }, silent = true, },

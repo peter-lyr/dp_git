@@ -97,6 +97,23 @@ function M.next_hunk()
   require 'gitsigns'.next_hunk()
 end
 
+function M.temp_map_hunk()
+  B.temp_map({
+    { 'j', function() M.next_hunk() end, desc = 'git.signs: next_hunk', mode = { 'n', 'v', }, silent = true, },
+    { 'k', function() M.prev_hunk() end, desc = 'git.signs: prev_hunk', mode = { 'n', 'v', }, silent = true, },
+  }, 'm')
+end
+
+function M.leader_j()
+  M.next_hunk()
+  M.temp_map_hunk()
+end
+
+function M.leader_k()
+  M.prev_hunk()
+  M.temp_map_hunk()
+end
+
 function M.stage_hunk()
   require 'gitsigns'.stage_hunk()
 end
@@ -162,8 +179,8 @@ function M.toggle_signs()
 end
 
 require 'which-key'.register {
-  ['<leader>k'] = { function() M.prev_hunk() end, 'git.signs: prev_hunk', mode = { 'n', 'v', }, },
-  ['<leader>j'] = { function() M.next_hunk() end, 'git.signs: next_hunk', mode = { 'n', 'v', }, },
+  ['<leader>k'] = { function() M.leader_k() end, 'git.signs: prev_hunk', mode = { 'n', 'v', }, },
+  ['<leader>j'] = { function() M.leader_j() end, 'git.signs: next_hunk', mode = { 'n', 'v', }, },
   ['<leader>gd'] = { function() M.diffthis() end, 'git.signs: diffthis', mode = { 'n', }, silent = true, },
   ['<leader>ge'] = { function() M.toggle_deleted() end, 'git.signs: toggle_deleted', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gu'] = { function() M.undo_stage_hunk() end, 'git.signs: undo_stage_hunk', mode = { 'n', }, silent = true, },

@@ -107,6 +107,7 @@ end
 function M.leader_j()
   local hunks = require 'gitsigns.actions'.get_hunks()
   if not hunks or #hunks == 0 then
+    print 'no hunk'
     return
   end
   M.next_hunk()
@@ -116,6 +117,7 @@ end
 function M.leader_k()
   local hunks = require 'gitsigns.actions'.get_hunks()
   if not hunks or #hunks == 0 then
+    print 'no hunk'
     return
   end
   M.prev_hunk()

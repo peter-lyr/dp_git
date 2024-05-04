@@ -105,11 +105,19 @@ function M.temp_map_hunk()
 end
 
 function M.leader_j()
+  local hunks = require 'gitsigns.actions'.get_hunks()
+  if not hunks or #hunks == 0 then
+    return
+  end
   M.next_hunk()
   M.temp_map_hunk()
 end
 
 function M.leader_k()
+  local hunks = require 'gitsigns.actions'.get_hunks()
+  if not hunks or #hunks == 0 then
+    return
+  end
   M.prev_hunk()
   M.temp_map_hunk()
 end

@@ -355,6 +355,7 @@ require 'which-key'.register {
   ['<leader>ggc'] = { name = 'git.push.clone/commit', },
   ['<leader>ggcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggcp'] = { function() M.commit_push(nil, 1) end, 'git.push: commit_push commit_history_en', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggcm'] = { function() M.commit() end, 'git.push: commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {

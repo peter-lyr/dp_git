@@ -67,7 +67,12 @@ function M.addcommitpush_do(info)
     B.set_timeout(10, function()
       info = M.get_info(info)
       B.notify_info_append('addcommitpush: ' .. info)
-      B.system_run('asyncrun', 'git add -A && git status && git commit -m "%s" && git push', info)
+      B.system_run('asyncrun', {
+        'git add -A',
+        'git status',
+        'git commit -m "%s"',
+        'git push',
+      }, info)
     end)
   end
 end
@@ -142,7 +147,10 @@ function M.commit_push_do(info)
     B.set_timeout(10, function()
       info = M.get_info(info)
       B.notify_info_append('commit_push: ' .. info)
-      B.system_run('asyncrun', 'git commit -m "%s" && git push', info)
+      B.system_run('asyncrun', {
+        'git commit -m "%s"',
+        'git push',
+      }, info)
     end)
   end
 end
@@ -312,9 +320,17 @@ function M.pull_all()
   for _, dir in ipairs(M.repos_dir) do
     local type, url = M.get_git_remote_url(dir)
     if type == 'https' then
-      B.system_run('start', '%s && git remote remove origin && git remote add origin git@%s:%s && git pull', B.system_cd(dir), url, string.match(url, '[^/]+/(.+)'))
+      B.system_run('start', {
+        '%s',
+        'git remote remove origin',
+        'git remote add origin git@%s:%s',
+        'git pull',
+      }, B.system_cd(dir), url, string.match(url, '[^/]+/(.+)'))
     else
-      B.system_run('start silent', '%s && git pull', B.system_cd(dir))
+      B.system_run('start silent', {
+        '%s',
+        'git pull',
+      }, B.system_cd(dir))
     end
     info = info .. dir .. '\n'
   end
@@ -336,7 +352,10 @@ function M.clone()
     end
     local author, repo = string.match(vim.fn.input('author/repo to clone: ', 'peter-lyr/2023'), '(.+)/(.+)')
     if B.is(author) and B.is(repo) then
-      B.system_run('start', [[cd %s & git clone git@github.com:%s/%s.git]], proj, author, repo)
+      B.system_run('start', {
+        'cd %s',
+        'git clone git@github.com:%s/%s.git',
+      }, proj, author, repo)
     end
   end)
 end

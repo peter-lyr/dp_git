@@ -7,6 +7,9 @@ local sta, B = pcall(require, 'dp_base')
 
 if not sta then return print('Dp_base is required!', debug.getinfo(1)['source']) end
 
+M.source = B.getsource(debug.getinfo(1)['source'])
+M.lua = B.getlua(M.source)
+
 if B.check_plugins {
       'git@github.com:peter-lyr/dp_init',
       'git@github.com:peter-lyr/dp_telescope',
@@ -18,6 +21,10 @@ if B.check_plugins {
     } then
   return
 end
+
+require 'which-key'.register {
+  ['<leader>g<f1>'] = { function() B.jump_or_edit(M.source) end, 'open lua: ' .. M.lua, mode = { 'n', 'v', }, silent = true, },
+}
 
 require 'which-key'.register {
   ['<leader>g'] = { name = 'git', },

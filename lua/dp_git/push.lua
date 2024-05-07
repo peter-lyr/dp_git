@@ -8,6 +8,7 @@ M.pull_all_prepared = nil
 M.timeout = 60 * 60 * 24
 
 function M.get_info(info)
+  info = B.cmd_escape(info)
   info = string.gsub(info, '"', "'")
   info = string.gsub(info, '#', ' ')
   info = string.gsub(info, '\r', '\n')

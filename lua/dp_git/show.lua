@@ -2,7 +2,7 @@ local M = {}
 
 local B = require 'dp_base'
 
-local git_push = require 'dp_git_push'
+local git_push = require 'dp_git.push'
 
 function M.lazygit()
   B.system_run('start', 'lazygit')

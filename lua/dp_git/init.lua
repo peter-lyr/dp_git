@@ -23,12 +23,12 @@ require 'which-key'.register {
   ['<leader>g'] = { name = 'git', },
 }
 
-require 'dp_git_fugitive'
-require 'dp_git_signs'
-require 'dp_git_push'
-require 'dp_git_show'
-require 'dp_git_reset'
-require 'dp_git_stash'
-require 'dp_git_diffview'
+require 'dp_git.fugitive'
+require 'dp_git.signs'
+require 'dp_git.push'
+require 'dp_git.show'
+require 'dp_git.reset'
+require 'dp_git.stash'
+require 'dp_git.diffview'
 
 return M

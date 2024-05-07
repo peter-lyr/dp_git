@@ -1,7 +1,5 @@
 local M = {}
 
-local B = require 'dp_base'
-
 function M.fugitive_toggle()
   if vim.o.ft == 'fugitive' then
     vim.cmd 'close'

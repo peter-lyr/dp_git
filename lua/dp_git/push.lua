@@ -259,6 +259,26 @@ function M.init()
   end)
 end
 
+function M.just_init_do(git_root_dir)
+  local file_path = B.get_filepath(git_root_dir, '.gitignore')
+  file_path:write('*', 'w')
+  file_path:write('\r\n!.gitignore', 'a')
+  B.system_run('asyncrun', {
+    B.system_cd(git_root_dir),
+    'git init',
+    'git add .gitignore',
+    [[git commit -m ".gitignore"]],
+  })
+end
+
+function M.just_init()
+  B.ui_sel(B.get_file_dirs(B.buf_get_name()), 'git init', function(choice)
+    if choice then
+      M.just_init_do(choice)
+    end
+  end)
+end
+
 function M.addall()
   pcall(vim.call, 'ProjectRootCD')
   B.system_run('asyncrun', 'git add -A')
@@ -370,7 +390,8 @@ require 'which-key'.register {
   ['<leader>gc'] = { function() M.commit_push() end, 'git.push: commit_push', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gp'] = { function() M.pull() end, 'git.push: pull', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gga'] = { function() M.addcommitpush(nil, 1) end, 'git.push: addcommitpush commit_history_en', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggi'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggin'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggij'] = { function() M.just_init() end, 'git.push: just_init', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggc'] = { name = 'git.push.clone/commit', },
   ['<leader>ggcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },

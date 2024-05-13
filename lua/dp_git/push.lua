@@ -371,12 +371,19 @@ function M.clone()
     if not proj then
       return
     end
-    local author, repo = string.match(vim.fn.input('author/repo to clone: ', 'peter-lyr/2023'), '(.+)/(.+)')
+    local input = vim.fn.input('author/repo [local_repo] to clone: ', 'peter-lyr/')
+    local author, repo, local_repo
+    if B.is_in_str(' ', input) then
+      author, repo, local_repo = string.match(input, '(.+)/([^ ]+) +([^ ]+)')
+    else
+      author, repo = string.match(input, '(.+)/([^ ]+)')
+    end
     if B.is(author) and B.is(repo) then
       B.system_run('start', {
         'cd %s',
-        'git clone git@github.com:%s/%s.git',
-      }, proj, author, repo)
+        'echo git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
+        'git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
+      }, proj, author, repo, author, repo)
     end
   end)
 end

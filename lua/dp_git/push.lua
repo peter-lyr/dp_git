@@ -380,10 +380,11 @@ function M.clone()
     end
     if B.is(author) and B.is(repo) then
       B.system_run('start', {
-        'cd %s',
+        'cd /d %s',
+        'echo %s',
         'echo git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
         'git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
-      }, proj, author, repo, author, repo)
+      }, proj, proj, author, repo, author, repo)
     end
   end)
 end

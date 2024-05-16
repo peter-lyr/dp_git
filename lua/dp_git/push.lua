@@ -311,8 +311,8 @@ end
 
 function M.pull_all_prepare()
   M.pull_all_prepared = 1
-  M.repos_dir = { B.nvim_dir, }
-  local _gits = B.get_dirs_equal('.git', B.get_repos_dir(), { hidden = true, depth = 2, })
+  M.repos_dir = { vim.fn.stdpath 'config', }
+  local _gits = B.get_dirs_equal('.git', DepeiRepos, { hidden = true, depth = 2, })
   for _, dir in ipairs(_gits) do
     M.repos_dir[#M.repos_dir + 1] = B.file_parent(dir)
   end
@@ -399,10 +399,11 @@ function M.clone()
     end
     if B.is(author) and B.is(repo) then
       B.system_run('start', {
+        'echo %s',
         'cd %s',
         'echo git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
         'git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
-      }, proj, author, repo, author, repo)
+      }, proj, proj, author, repo, author, repo)
     end
   end)
 end

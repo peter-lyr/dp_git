@@ -2,8 +2,8 @@ local M = {}
 
 local B = require 'dp_base'
 
-M.word_diff_en = 1
-M.word_diff = 1
+M.word_diff_en = 0
+M.word_diff = 0
 
 M.moving = nil
 

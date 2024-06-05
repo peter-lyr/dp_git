@@ -30,6 +30,7 @@ end
 require 'which-key'.register {
   ['<leader>go'] = { name = 'git.show', },
   ['<leader>gol'] = { function() M.lazygit() end, 'git.lazy: lazygit', mode = { 'n', 'v', }, silent = true, },
+  ['gl'] = { function() M.lazygit() end, 'git.lazy: lazygit', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gob'] = { function() M.git_browser() end, 'git.push: browser', mode = { 'n', 'v', }, silent = true, },
   ['<leader>goh'] = { function() M.show_commit_history() end, 'git.push: show_commit_history', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gog'] = { name = 'git.show.graph', },

@@ -37,5 +37,6 @@ require 'dp_git.show'
 require 'dp_git.reset'
 require 'dp_git.stash'
 require 'dp_git.diffview'
+require 'dp_git.dev'
 
 return M

@@ -2,6 +2,11 @@ local M = {}
 
 local B = require 'dp_base'
 
+M.source = B.getsource(debug.getinfo(1)['source'])
+M.lua = B.getlua(M.source)
+
+M.svn_tmp_gitkeep_py = B.getcreate_file(B.file_parent(M.source), 'svn_tmp.gitkeep.py')
+
 M.commit_history_en = nil
 M.pull_all_prepared = nil
 
@@ -242,6 +247,7 @@ function M.init_do(git_root_dir)
     'cd %s',
     'git init --bare',
     'cd ..',
+    M.svn_tmp_gitkeep_py,
     'git init',
     'git add .gitignore',
     [[git commit -m ".gitignore"]],
@@ -265,6 +271,7 @@ function M.just_init_ignore_all_do(git_root_dir)
   file_path:write('\r\n!.gitignore', 'a')
   B.system_run('asyncrun', {
     B.system_cd(git_root_dir),
+    M.svn_tmp_gitkeep_py,
     'git init',
     'git add .gitignore',
     [[git commit -m ".gitignore"]],
@@ -284,6 +291,7 @@ function M.just_init_do(git_root_dir)
   file_path:write(git_root_dir, 'w')
   B.system_run('asyncrun', {
     B.system_cd(git_root_dir),
+    M.svn_tmp_gitkeep_py,
     'git init',
     'git add .',
     [[git commit -m "first commit"]],

@@ -2,13 +2,21 @@
 # 在tmp目录下面创建.gitkeep文件
 
 import os
+import sys
 
-for root, dirs, _ in os.walk(os.getcwd()):
+cwd = os.getcwd()
+
+if len(sys.argv) > 1:
+    temp = sys.argv[1]
+    if os.path.isdir(temp):
+        cwd = temp
+
+for root, dirs, _ in os.walk(cwd):
     for dir in dirs:
-        if dir == '.svn':
-            tmp = os.path.join(root, dir, 'tmp')
+        if dir == ".svn":
+            tmp = os.path.join(root, dir, "tmp")
             os.makedirs(tmp, exist_ok=True)
-            _gitkeep = os.path.join(tmp, '.gitkeep')
-            with open(_gitkeep, 'wb') as f:
-                f.write(b'')
+            _gitkeep = os.path.join(tmp, ".gitkeep")
+            with open(_gitkeep, "wb") as f:
+                f.write(b"")
 os.system("pause")

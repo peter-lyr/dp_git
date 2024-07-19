@@ -214,6 +214,13 @@ function M.push()
   end
 end
 
+function M.gitkeep(cwd)
+  if not cwd then
+    cwd = B.get_proj_root()
+  end
+  B.system_run('start silent', '%s %s', M.svn_tmp_gitkeep_py, cwd)
+end
+
 function M.init_do(git_root_dir)
   local remote_name = B.get_fname_tail(git_root_dir)
   if remote_name == '' then

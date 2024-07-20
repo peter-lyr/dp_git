@@ -19,4 +19,3 @@ for root, dirs, _ in os.walk(cwd):
             _gitkeep = os.path.join(tmp, ".gitkeep")
             with open(_gitkeep, "wb") as f:
                 f.write(b"")
-os.system("pause")

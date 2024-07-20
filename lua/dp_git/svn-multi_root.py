@@ -13,7 +13,11 @@ except:
     # cmd = "clean"
 
 try:
-    revision = f"-r {int(sys.argv[2])}"
+    revision = int(sys.argv[2])
+    if revision >= 1000000:
+        revision = ""
+    else:
+        revision = f"-r {revision}"
 except:
     # revision = "-r 3000"
     revision = ""

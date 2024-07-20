@@ -5,11 +5,11 @@ from multiprocessing import Process
 try:
     cmd = f"{sys.argv[1]}"
 except:
-    cmd = "update"
+    # cmd = "update"
     # cmd = "clean_update"
     # cmd = "show"
-    # cmd = "show-gui"
-    cmd = "kill-TortoiseProc.exe"
+    cmd = "show-gui"
+    # cmd = "kill-TortoiseProc.exe"
     # cmd = "clean"
 
 try:
@@ -20,7 +20,7 @@ except:
 
 
 try:
-    cwd = f"-r {sys.argv[3]}"  # 一版不会主动指定
+    cwd = f"{sys.argv[3]}"
 except:
     cwd = os.getcwd()
 
@@ -102,6 +102,8 @@ class Svn:
             for dir in dirs:
                 if dir == ".svn":
                     roots.append(root)
+        if not roots:
+            return
         self.svn_do(roots[0])
         if self.just_do_once:
             self.finish()

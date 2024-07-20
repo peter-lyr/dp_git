@@ -13,7 +13,7 @@ except:
     # cmd = "clean"
 
 try:
-    revision = f"-r {sys.argv[2]}"
+    revision = f"-r {int(sys.argv[2])}"
 except:
     # revision = "-r 3000"
     revision = ""
@@ -96,6 +96,12 @@ class Svn:
             return
         os.system("pause")
 
+    def svn(self, root):
+        if self.use_multiprocess:
+            Process(target=self.svn_do, args=[root]).start()
+        else:
+            self.svn_do(root)
+
     def start(self):
         roots = []
         for root, dirs, _ in os.walk(self.cwd):
@@ -104,15 +110,12 @@ class Svn:
                     roots.append(root)
         if not roots:
             return
-        self.svn_do(roots[0])
+        self.svn(roots[0])
         if self.just_do_once:
             self.finish()
             return
         for root in roots[1:]:
-            if self.use_multiprocess:
-                Process(target=self.svn_do, args=[root]).start()
-            else:
-                self.svn_do(root)
+            self.svn(root)
             if self.just_do_once:
                 self.finish()
                 return

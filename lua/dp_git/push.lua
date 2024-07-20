@@ -221,11 +221,15 @@ function M.svn_multi_root(cwd, cmd, revision)
     temp = B.get_file_git_root()
   end
   if not temp then
-    print('not found cwd')
+    print 'not found cwd'
     return
   end
+  local start_type = 'start'
+  if B.is_in_tbl(cmd, { 'show-gui', }) then
+    start_type = 'start silent'
+  end
   cwd = temp
-  B.system_run('start silent',
+  B.system_run(start_type,
     {
       '%s "%s"',
       '%s %s "%s" "%s"',

@@ -6,6 +6,7 @@ M.source = B.getsource(debug.getinfo(1)['source'])
 M.lua = B.getlua(M.source)
 
 M.svn_tmp_gitkeep_py = B.getcreate_file(B.file_parent(M.source), 'svn_tmp.gitkeep.py')
+M.svn_multi_root_py = B.getcreate_file(B.file_parent(M.source), 'svn-multi_root.py')
 
 M.commit_history_en = nil
 M.pull_all_prepared = nil
@@ -214,11 +215,25 @@ function M.push()
   end
 end
 
-function M.gitkeep(cwd)
-  if not cwd then
+function M.svn_multi_root(cwd, cmd, revision)
+  if cwd == 'git' then
+    cwd = B.get_file_git_root()
+  else
     cwd = B.get_proj_root()
   end
-  B.system_run('start silent', '%s %s', M.svn_tmp_gitkeep_py, cwd)
+  B.system_run('start silent',
+    {
+      '%s "%s"',
+      '%s %s %s "%s"',
+    },
+    M.svn_tmp_gitkeep_py, cwd,
+    M.svn_multi_root_py, cmd, revision, cwd
+  )
+  -- B.print(
+  --   '%s "%s" && %s %s %s "%s"',
+  --   M.svn_tmp_gitkeep_py, cwd,
+  --   M.svn_multi_root_py, cmd, revision, cwd
+  -- )
 end
 
 function M.init_do(git_root_dir)

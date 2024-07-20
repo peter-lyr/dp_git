@@ -59,6 +59,8 @@ class Svn:
         if self.use_multiprocess or self.cmd in ["kill-TortoiseProc.exe"]:
             self.do_not_pase = True
 
+        self.is_test = False
+
         self.commands = {
             "clean": self.clean,
             "update": self.update,
@@ -92,6 +94,9 @@ class Svn:
         )
 
     def finish(self):
+        if self.is_test:
+            os.system("pause")
+            return
         if self.do_not_pase:
             return
         os.system("pause")
@@ -104,12 +109,19 @@ class Svn:
 
     def start(self):
         roots = []
+        if self.is_test:
+            print('self.cwd:', self.cwd)
         for root, dirs, _ in os.walk(self.cwd):
+            if self.is_test:
+                print('root:', root)
+                print('dirs:', dirs)
             for dir in dirs:
                 if dir == ".svn":
                     roots.append(root)
         if not roots:
             return
+        if self.is_test:
+            print('len(roots):', len(roots))
         self.svn(roots[0])
         if self.just_do_once:
             self.finish()

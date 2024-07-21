@@ -75,7 +75,9 @@ class Svn:
         }
 
     def show_gui(self, root):
-        return [f"tortoiseproc /command:log /path:{root}"]
+        cmd = f"tortoiseproc /command:log /path:{root}"
+        cmd += "& winwaitactive.exe tortoiseproc.exe"
+        return [cmd]
 
     def print_head(self, *info):
         info = "= " + " - ".join([*info])

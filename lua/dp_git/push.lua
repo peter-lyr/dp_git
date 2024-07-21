@@ -215,28 +215,8 @@ function M.push()
   end
 end
 
-function M.svn_multi_root(cwd, cmd, revision)
-  local temp = B.get_proj_root()
-  if cwd == 'git' then
-    temp = B.get_file_git_root()
-  end
-  if not temp then
-    print 'not found cwd'
-    return
-  end
-  local start_type = 'start'
-  if B.is_in_tbl(cmd, { 'show-gui', }) then
-    start_type = 'start silent'
-  end
-  cwd = temp
-  B.system_run(start_type,
-    {
-      '%s "%s"',
-      '%s %s "%s" "%s"',
-    },
-    M.svn_tmp_gitkeep_py, cwd,
-    M.svn_multi_root_py, cmd, revision, cwd
-  )
+function M.git_keep()
+  B.system_run('start silent', { '%s "%s"', }, M.svn_tmp_gitkeep_py, B.get_file_git_root())
 end
 
 function M.init_do(git_root_dir)

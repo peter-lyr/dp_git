@@ -430,44 +430,26 @@ require 'which-key'.register {
 }
 
 require 'which-key'.register {
-  ['<leader>ga'] = { function() M.addcommitpush() end, 'git.push: addcommitpush', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gc'] = { function() M.commit_push() end, 'git.push: commit_push', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gp'] = { function() M.pull() end, 'git.push: pull', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gga'] = { function() M.addcommitpush(nil, 1) end, 'git.push: addcommitpush commit_history_en', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggi'] = { name = 'git.push.init', },
   ['<leader>ggin'] = { function() M.init() end, 'git.push: init', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggij'] = { function() M.just_init() end, 'git.push: just_init', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggii'] = { function() M.just_init_ignore_all() end, 'git.push: just_init_ignore_all', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggc'] = { name = 'git.push.clone/commit', },
-  ['<leader>ggcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggcp'] = { function() M.commit_push(nil, 1) end, 'git.push: commit_push commit_history_en', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggcm'] = { function() M.commit() end, 'git.push: commit', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggo'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {
-  ['<leader>g<c-0>'] = { function() M.addcommitpush_parentheses() end, 'git.push: addcommitpush parentheses', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-4>'] = { function() M.addcommitpush_cWORD() end, 'git.push: addcommitpush cWORD', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-\'>'] = { function() M.addcommitpush_single_quote() end, 'git.push: addcommitpush single_quote', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-]>'] = { function() M.addcommitpush_bracket() end, 'git.push: addcommitpush bracket', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-`>'] = { function() M.addcommitpush_back_quote() end, 'git.push: addcommitpush back_quote', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-a>'] = { function() M.addall() end, 'git.push: addall', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-e>'] = { function() M.addcommitpush_cword() end, 'git.push: addcommitpush cword', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-l>'] = { function() M.addcommitpush_curline() end, 'git.push: addcommitpush curline', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-p>'] = { function() M.pull_all() end, 'git.push: pull_all', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-s-.>'] = { function() M.addcommitpush_angle_bracket() end, 'git.push: addcommitpush angle_bracket', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-s-\'>'] = { function() M.addcommitpush_double_quote() end, 'git.push: addcommitpush double_quote', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>g<c-s-]>'] = { function() M.addcommitpush_brace() end, 'git.push: addcommitpush brace', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-0>'] = { function() M.addcommitpush_parentheses() end, 'git.push: addcommitpush parentheses', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-4>'] = { function() M.addcommitpush_cWORD() end, 'git.push: addcommitpush cWORD', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-\'>'] = { function() M.addcommitpush_single_quote() end, 'git.push: addcommitpush single_quote', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-]>'] = { function() M.addcommitpush_bracket() end, 'git.push: addcommitpush bracket', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-`>'] = { function() M.addcommitpush_back_quote() end, 'git.push: addcommitpush back_quote', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-e>'] = { function() M.addcommitpush_cword() end, 'git.push: addcommitpush cword', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-l>'] = { function() M.addcommitpush_curline() end, 'git.push: addcommitpush curline', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-s-.>'] = { function() M.addcommitpush_angle_bracket() end, 'git.push: addcommitpush angle_bracket', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-s-\'>'] = { function() M.addcommitpush_double_quote() end, 'git.push: addcommitpush double_quote', mode = { 'n', 'v', }, silent = true, },
-  ['g<c-s-]>'] = { function() M.addcommitpush_brace() end, 'git.push: addcommitpush brace', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggi'] = { name = 'git.push.pull', },
+  ['<leader>gpc'] = { function() M.pull() end, 'git.push: pull cur', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gpa'] = { function() M.pull_all() end, 'git.push: pull all', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>gc'] = { name = 'git.push.clone/commit', },
+  ['<leader>gcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gco'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 return M

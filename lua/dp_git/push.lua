@@ -320,6 +320,11 @@ function M.addall()
   B.system_run('asyncrun', 'git add -A')
 end
 
+function M.addall_Git_commit()
+  M.addall()
+  M.Git_commit()
+end
+
 function M.pull()
   pcall(vim.call, 'ProjectRootCD')
   B.notify_info 'git pull'
@@ -437,19 +442,22 @@ require 'which-key'.register {
 }
 
 require 'which-key'.register {
-  ['<leader>ggi'] = { name = 'git.push.pull', },
+  ['<leader>gp'] = { name = 'git.push.pull', },
   ['<leader>gpc'] = { function() M.pull() end, 'git.push: pull cur', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gpa'] = { function() M.pull_all() end, 'git.push: pull all', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {
-  ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ga'] = { function() M.addall() end, 'git.push: add all', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gn'] = { function() M.addall_Git_commit() end, 'git.push: addall_Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {
-  ['<leader>gc'] = { name = 'git.push.clone/commit', },
-  ['<leader>gcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>gco'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>g\\'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
+}
+
+require 'which-key'.register {
+  ['<leader>gc'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 return M

@@ -37,3 +37,7 @@ require 'git-dev'.setup {
   },
   verbose = true,
 }
+
+require 'which-key'.register {
+  ['<leader>gb'] = { function() require 'git-log'.check_log() end, 'git.dev: check_log', mode = { 'n', 'v', }, silent = true, },
+}

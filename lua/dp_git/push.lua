@@ -202,6 +202,10 @@ function M.commit(info, commit_history_en)
   end
 end
 
+function M.Git_commit()
+  vim.cmd 'Git commit'
+end
+
 function M.push()
   pcall(vim.call, 'ProjectRootCD')
   local result = vim.fn.systemlist { 'git', 'cherry', '-v', }
@@ -438,6 +442,7 @@ require 'which-key'.register {
   ['<leader>ggcl'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggcp'] = { function() M.commit_push(nil, 1) end, 'git.push: commit_push commit_history_en', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ggcm'] = { function() M.commit() end, 'git.push: commit', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggo'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {

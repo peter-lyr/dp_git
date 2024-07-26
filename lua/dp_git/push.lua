@@ -433,7 +433,9 @@ end
 B.aucmd('BufLeave', 'git.push.BufLeave', {
   callback = function()
     if vim.o.ft == 'gitcommit' then
-      M.push()
+      B.set_timeout(100, function()
+        M.push()
+      end)
     end
   end,
 })

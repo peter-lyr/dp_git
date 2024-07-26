@@ -430,6 +430,14 @@ function M.clone()
   end)
 end
 
+B.aucmd('BufLeave', 'git.push.BufLeave', {
+  callback = function()
+    if vim.o.ft == 'gitcommit' then
+      M.push()
+    end
+  end,
+})
+
 require 'which-key'.register {
   ['<leader>gg'] = { name = 'git.push', },
 }

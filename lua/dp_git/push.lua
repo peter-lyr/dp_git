@@ -321,7 +321,7 @@ function M.addall()
 end
 
 function M.addall_Git_commit()
-  M.addall()
+  vim.fn.system 'git add -A'
   M.Git_commit()
 end
 

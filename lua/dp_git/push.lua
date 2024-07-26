@@ -464,7 +464,7 @@ require 'which-key'.register {
 }
 
 require 'which-key'.register {
-  ['<leader>g\\'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {

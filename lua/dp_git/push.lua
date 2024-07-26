@@ -448,7 +448,8 @@ require 'which-key'.register {
 }
 
 require 'which-key'.register {
-  ['<leader>ga'] = { function() M.addall() end, 'git.push: add all', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gA'] = { function() M.addall() end, 'git.push: add all', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ga'] = { function() M.addcommitpush() end, 'git.push: add all', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gn'] = { function() M.addall_Git_commit() end, 'git.push: addall_Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 

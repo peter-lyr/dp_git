@@ -40,4 +40,8 @@ require 'dp_git.diffview'
 require 'dp_git.dev'
 require 'dp_git.blame'
 
+require 'which-key'.register {
+  ['<leader>g<c-h>'] = { ':<c-u>Telescope git_file_history git_file_history<cr>', 'git_file_history', mode = { 'n', 'v', }, silent = true, },
+}
+
 return M

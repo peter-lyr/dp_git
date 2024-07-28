@@ -31,6 +31,8 @@ local B = require 'dp_base'
 -- end
 
 require 'git-dev'.setup {
+  ephemeral = false,
+  read_only = false,
   repositories_dir = B.rep_slash(vim.fn.stdpath 'cache' .. '/git-dev'),
   git = {
     base_uri_format = 'git@github.com:%s.git',

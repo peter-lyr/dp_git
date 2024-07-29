@@ -297,7 +297,7 @@ end
 
 function M.just_init_do(git_root_dir)
   local file_path = B.get_filepath(git_root_dir, 'README.md')
-  file_path:write(git_root_dir, 'w')
+  file_path:write(git_root_dir, 'a')
   B.system_run('asyncrun', {
     B.system_cd(git_root_dir),
     M.svn_tmp_gitkeep_py,

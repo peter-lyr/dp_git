@@ -241,11 +241,15 @@ function M.init_do(git_root_dir)
       file_path:write(remote_name, 'a')
       file_path:write('\r\n.clang-format', 'a')
       file_path:write('\r\n.clangd', 'a')
+      file_path:write('\r\n!.svn', 'a')
+      file_path:write('\r\n!.svn/*', 'a')
     end
   else
     file_path:write(remote_name, 'w')
     file_path:write('\r\n.clang-format', 'a')
     file_path:write('\r\n.clangd', 'a')
+    file_path:write('\r\n!.svn', 'a')
+    file_path:write('\r\n!.svn/*', 'a')
   end
   B.done_append_default(function()
     M.addcommitpush 's1'

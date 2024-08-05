@@ -11,7 +11,10 @@ end
 function M.create()
   pcall(vim.call, 'ProjectRootCD')
   B.notify_info 'git stash push --include-untracked'
-  B.system_run('asyncrun', 'git stash push --include-untracked')
+  local info = vim.fn.input('stash info: ')
+  if B.is(info) then
+    B.system_run('asyncrun', 'git stash push --include-untracked -m "%s"', info)
+  end
 end
 
 function M.delete()

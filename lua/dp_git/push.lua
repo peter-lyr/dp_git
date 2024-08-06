@@ -337,7 +337,10 @@ end
 
 function M.pull_all_prepare()
   M.pull_all_prepared = 1
-  M.repos_dir = { vim.fn.stdpath 'config', }
+  M.repos_dir = {
+    vim.fn.stdpath 'config',
+    Home .. '\\.spacemacs.d',
+  }
   local _gits = B.get_dirs_equal('.git', DepeiRepos, { hidden = true, depth = 2, })
   for _, dir in ipairs(_gits) do
     M.repos_dir[#M.repos_dir + 1] = B.file_parent(dir)

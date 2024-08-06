@@ -468,15 +468,13 @@ require 'which-key'.register {
   ['<leader>gA'] = { function() M.addall() end, 'git.push: add all', mode = { 'n', 'v', }, silent = true, },
   ['<leader>ga'] = { function() M.addcommitpush() end, 'git.push: add all', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gn'] = { function() M.addall_Git_commit() end, 'git.push: addall_Git_commit', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gc'] = { function() M.commit() end, 'git.push: commit', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>ggc'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
 }
 
 require 'which-key'.register {
   ['<leader>ggs'] = { function() M.push() end, 'git.push: push', mode = { 'n', 'v', }, silent = true, },
-  ['<leader>ggc'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
-}
-
-require 'which-key'.register {
-  ['<leader>gc'] = { function() M.Git_commit() end, 'git.push: Git_commit', mode = { 'n', 'v', }, silent = true, },
+  ['<leader>gggc'] = { function() M.clone() end, 'git.push: clone', mode = { 'n', 'v', }, silent = true, },
 }
 
 return M

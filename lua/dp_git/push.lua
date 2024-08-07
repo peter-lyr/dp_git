@@ -430,8 +430,8 @@ function M.clone()
       B.system_run('start', {
         'cd /d %s',
         'echo %s',
-        'echo git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
-        'git clone git@github.com:%s/%s.git ' .. (local_repo or ''),
+        'echo git clone --recursive git@github.com:%s/%s.git ' .. (local_repo or ''),
+        'git clone --recursive git@github.com:%s/%s.git ' .. (local_repo or ''),
       }, proj, proj, author, repo, author, repo)
     end
   end)

@@ -339,7 +339,7 @@ function M.pull_all_prepare()
   M.pull_all_prepared = 1
   M.repos_dir = {
     vim.fn.stdpath 'config',
-    Home .. '\\.spacemacs.d',
+    Home .. '\\.emacs.d',
   }
   local _gits = B.get_dirs_equal('.git', DepeiRepos, { hidden = true, depth = 2, })
   for _, dir in ipairs(_gits) do

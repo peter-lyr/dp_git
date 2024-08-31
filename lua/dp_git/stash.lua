@@ -8,6 +8,12 @@ function M.pop()
   B.system_run('asyncrun', 'git stash pop')
 end
 
+function M.apply()
+  pcall(vim.call, 'ProjectRootCD')
+  B.notify_info 'git stash apply'
+  B.system_run('asyncrun', 'git stash apply')
+end
+
 function M.create()
   pcall(vim.call, 'ProjectRootCD')
   B.notify_info 'git stash push --include-untracked'
@@ -25,6 +31,7 @@ end
 
 require 'which-key'.register {
   ['<leader>gi'] = { name = 'git.stash', },
+  ['<leader>gia'] = { function() M.apply() end, 'git.stash: apply', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gip'] = { function() M.pop() end, 'git.stash: pop', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gic'] = { function() M.create() end, 'git.stash: create', mode = { 'n', 'v', }, silent = true, },
   ['<leader>gid'] = { function() M.delete() end, 'git.stash: delete', mode = { 'n', 'v', }, silent = true, },

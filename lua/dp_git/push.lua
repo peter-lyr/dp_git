@@ -395,11 +395,23 @@ function M.pull_all()
         'git remote add origin git@%s:%s',
         'git pull',
       }, B.system_cd(dir), url, string.match(url, '[^/]+/(.+)'))
+      if B.file_exists(B.get_file(dir, 'submodule-pull-or-clone.py')) then
+        B.system_run('start', {
+          B.system_cd(dir),
+          'python submodule-pull-or-clone.py'
+        })
+      end
     else
       B.system_run('start silent', {
         '%s',
         'git pull',
       }, B.system_cd(dir))
+      if B.file_exists(B.get_file(dir, 'submodule-pull-or-clone.py')) then
+        B.system_run('start', {
+          B.system_cd(dir),
+          'python submodule-pull-or-clone.py'
+        })
+      end
     end
     info = info .. dir .. '\n'
   end

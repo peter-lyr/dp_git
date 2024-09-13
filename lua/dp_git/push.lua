@@ -407,7 +407,7 @@ function M.pull_all()
         'git pull',
       }, B.system_cd(dir))
       if B.file_exists(B.get_file(dir, 'submodule-pull-or-clone.py')) then
-        B.system_run('start', {
+        B.system_run('start silent', {
           B.system_cd(dir),
           'python submodule-pull-or-clone.py'
         })
